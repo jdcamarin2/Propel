@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1028557114287",
+    "firebase_url": "https://propel-ec96c.firebaseio.com",
+    "project_id": "propel-ec96c",
+    "storage_bucket": "propel-ec96c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028557114287:android:fc8aaee475430be8bfbd5a",
+        "android_client_info": {
+          "package_name": "com.example.propel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028557114287-6bbaqrno8jvgek8s44hdpmur969jq49g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhtA_K9pQLDGKeoJoMf1jTp9sUile_jxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028557114287-6bbaqrno8jvgek8s44hdpmur969jq49g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
