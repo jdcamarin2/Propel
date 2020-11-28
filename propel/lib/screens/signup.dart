@@ -23,24 +23,44 @@ class _MyAppState extends State<MyApp> {
             Container(
                 margin: EdgeInsets.all(10),
                 child: TextField(
-                  controller: nameController,
+                 
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Full Name',
                   ),
-                  onChanged: (text) {
-                    setState(() {
-                      fullName = text;
-                      //you can access nameController in its scope to get
-                      // the value of text entered as shown below
-                      //fullName = nameController.text;
-                    });
-                  },
+
                 )),
             Container(
-              margin: EdgeInsets.all(30),
-              child: Text(fullName),
-            )
+                margin: EdgeInsets.all(10),
+                child: TextField(
+
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Email',
+                  ),
+
+                )),
+            Container(
+                margin: EdgeInsets.all(10),
+                child: TextField(
+
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Username',
+                  ),
+                )),
+
+            Container(
+                margin: EdgeInsets.all(10),
+                child: TextField(
+
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                  ),
+                ))
+
       ]))),
     ));
   }
