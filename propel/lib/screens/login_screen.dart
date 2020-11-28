@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontFamily: 'OpenSans',
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          icons
+
                         ),
                       ),
                       SizedBox(height: 30.0),
