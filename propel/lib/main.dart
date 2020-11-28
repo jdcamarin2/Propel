@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:propel/widgets/curved_navigation_bar.dart';
 import 'package:propel/screens/SingIn.dart';
+import 'package:propel/screens/news_tab.dart';
 
 
 //main method
@@ -17,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Widget> _widgetOptions = <Widget>[
     Text('Trending'),
-    Text('Messgaes Screen'),
+    NewsTab(),
     Text('Profile Screen'),
     SignIn()
   ];
