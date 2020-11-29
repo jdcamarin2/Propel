@@ -226,6 +226,42 @@ class MyStatelessWidget extends StatelessWidget {
                 onPressed: () {/* ... */},
               ),
               const SizedBox(width: 8),]),
+
+        CustomListItemTwo(
+          thumbnail: Container(
+            decoration: const BoxDecoration(color: Colors.pink),
+          ),
+          title: 'Need volunteers at shelter',
+          subtitle: 'Dogs and Cats and many more needs help ...',
+          author: 'Periku Animal Care',
+
+
+        ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              TextButton(
+                child: const Text('Read Story'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                child: const Text('Comment'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                child: const Text('Care'),
+                onPressed: () {/* ... */},
+              ),
+              TextButton(
+                child: const Text('Share'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),]),
+
+
+
       ],
     );
   }
