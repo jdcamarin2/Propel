@@ -79,7 +79,7 @@ class SongDetailTab extends StatelessWidget {
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Orgs')),
+      appBar: AppBar(title: Text('About the Organization')),
       body: _buildBody(),
     );
   }
