@@ -1,179 +1,174 @@
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+import 'package:propel/src/nav_button.dart';
+import 'package:propel/src/nav_custom_painter.dart';
 
+class CurvedNavigationBar extends StatefulWidget {
+  final List<Widget> items;
+  final int index;
+  final Color color;
+  final Color buttonBackgroundColor;
+  final Color backgroundColor;
+  final ValueChanged<int> onTap;
+  final Curve animationCurve;
+  final Duration animationDuration;
+  final double height;
 
-
-/// This is the main application widget.
-class MyApp extends StatelessWidget {
-  static const String _title = 'Flutter Code Sample';
+  CurvedNavigationBar({
+    Key key,
+    @required this.items,
+    this.index = 0,
+    this.color = Colors.white,
+    this.buttonBackgroundColor,
+    this.backgroundColor = Colors.blueAccent,
+    this.onTap,
+    this.animationCurve = Curves.easeOut,
+    this.animationDuration = const Duration(milliseconds: 600),
+    this.height = 75.0,
+  })  : assert(items != null),
+        assert(items.length >= 1),
+        assert(0 <= index && index < items.length),
+        assert(0 <= height && height <= 75.0),
+        super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: MyStatelessWidget(),
-      ),
-    );
-  }
+  CurvedNavigationBarState createState() => CurvedNavigationBarState();
 }
 
-class _ArticleDescription extends StatelessWidget {
-  _ArticleDescription({
-    Key key,
-    this.title,
-    this.subtitle,
-    this.author,
-    this.publishDate,
-    this.readDuration,
-  }) : super(key: key);
-
-  final String title;
-  final String subtitle;
-  final String author;
-  final String publishDate;
-  final String readDuration;
+class CurvedNavigationBarState extends State<CurvedNavigationBar>
+    with SingleTickerProviderStateMixin {
+  double _startingPos;
+  int _endingIndex = 0;
+  double _pos;
+  double _buttonHide = 0;
+  Widget _icon;
+  AnimationController _animationController;
+  int _length;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '$title',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(bottom: 2.0)),
-              Text(
-                '$subtitle',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                '$author',
-                style: const TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.black87,
-                ),
-              ),
-              Text(
-                '$publishDate - $readDuration',
-                style: const TextStyle(
-                  fontSize: 12.0,
-                  color: Colors.black54,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+  void initState() {
+    super.initState();
+    _icon = widget.items[widget.index];
+    _length = widget.items.length;
+    _pos = widget.index / _length;
+    _startingPos = widget.index / _length;
+    _animationController = AnimationController(vsync: this, value: _pos);
+    _animationController.addListener(() {
+      setState(() {
+        _pos = _animationController.value;
+        final endingPos = _endingIndex / widget.items.length;
+        final middle = (endingPos + _startingPos) / 2;
+        if ((endingPos - _pos).abs() < (_startingPos - _pos).abs()) {
+          _icon = widget.items[_endingIndex];
+        }
+        _buttonHide =
+            (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
+      });
+    });
   }
-}
 
-class CustomListItemTwo extends StatelessWidget {
-  CustomListItemTwo({
-    Key key,
-    this.thumbnail,
-    this.title,
-    this.subtitle,
-    this.author,
-    this.publishDate,
-    this.readDuration,
-  }) : super(key: key);
+  @override
+  void didUpdateWidget(CurvedNavigationBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.index != widget.index) {
+      final newPosition = widget.index / _length;
+      _startingPos = _pos;
+      _endingIndex = widget.index;
+      _animationController.animateTo(newPosition,
+          duration: widget.animationDuration, curve: widget.animationCurve);
+    }
+  }
 
-  final Widget thumbnail;
-  final String title;
-  final String subtitle;
-  final String author;
-  final String publishDate;
-  final String readDuration;
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: SizedBox(
-        height: 100,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            AspectRatio(
-              aspectRatio: 1.0,
-              child: thumbnail,
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      color: widget.backgroundColor,
+      height: widget.height,
+      child: Stack(
+        overflow: Overflow.visible,
+        alignment: Alignment.bottomCenter,
+        children: <Widget>[
+          Positioned(
+            bottom: -40 - (75.0 - widget.height),
+            left: Directionality.of(context) == TextDirection.rtl
+                ? null
+                : _pos * size.width,
+            right: Directionality.of(context) == TextDirection.rtl
+                ? _pos * size.width
+                : null,
+            width: size.width / _length,
+            child: Center(
+              child: Transform.translate(
+                offset: Offset(
+                  0,
+                  -(1 - _buttonHide) * 80,
+                ),
+                child: Material(
+                  color: widget.buttonBackgroundColor ?? widget.color,
+                  type: MaterialType.circle,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _icon,
+                  ),
+                ),
+              ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
-                child: _ArticleDescription(
-                  title: title,
-                  subtitle: subtitle,
-                  author: author,
-                  publishDate: publishDate,
-                  readDuration: readDuration,
-                ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0 - (75.0 - widget.height),
+            child: CustomPaint(
+              painter: NavCustomPainter(
+                  _pos, _length, widget.color, Directionality.of(context)),
+              child: Container(
+                height: 75.0,
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0 - (75.0 - widget.height),
+            child: SizedBox(
+                height: 100.0,
+                child: Row(
+                    children: widget.items.map((item) {
+                      return NavButton(
+                        onTap: _buttonTap,
+                        position: _pos,
+                        length: _length,
+                        index: widget.items.indexOf(item),
+                        child: Center(child: item),
+                      );
+                    }).toList())),
+          ),
+        ],
       ),
     );
   }
-}
 
-/// This is the stateless widget that the main application instantiates.
-class MyStatelessWidget extends StatelessWidget {
-  MyStatelessWidget({Key key}) : super(key: key);
+  void setPage(int index) {
+    _buttonTap(index);
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(10.0),
-      children: <Widget>[
-        CustomListItemTwo(
-          thumbnail: Container(
-            decoration: const BoxDecoration(color: Colors.pink),
-          ),
-          title: 'Flutter 1.0 Launch',
-          subtitle: 'Flutter continues to improve and expand its horizons.'
-              'This text should max out at two lines and clip',
-          author: 'Dash',
-          publishDate: 'Dec 28',
-          readDuration: '5 mins',
-        ),
-        CustomListItemTwo(
-          thumbnail: Container(
-            decoration: const BoxDecoration(color: Colors.blue),
-          ),
-          title: 'Flutter 1.2 Release - Continual updates to the framework',
-          subtitle: 'Flutter once again improves and makes updates.',
-          author: 'Flutter',
-          publishDate: 'Feb 26',
-          readDuration: '12 mins',
-        ),
-      ],
-    );
+  void _buttonTap(int index) {
+    if (widget.onTap != null) {
+      widget.onTap(index);
+    }
+    final newPosition = index / _length;
+    setState(() {
+      _startingPos = _pos;
+      _endingIndex = index;
+      _animationController.animateTo(newPosition,
+          duration: widget.animationDuration, curve: widget.animationCurve);
+    });
   }
 }
