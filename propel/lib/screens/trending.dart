@@ -12,14 +12,14 @@ void main() => runApp(MyApp());
 
 /// This is the main application widget.
 class MyApp extends StatelessWidget {
-  static const String _title = 'Flutter Code Sample';
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(title: const Text('Orgs Post'),backgroundColor: Colors.teal,),
         body: MyStatelessWidget(),
       ),
     );
@@ -170,7 +170,32 @@ class MyStatelessWidget extends StatelessWidget {
           author: 'Dash',
           publishDate: 'Dec 28',
           readDuration: '5 mins',
+
         ),
+    Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: <Widget>[
+    TextButton(
+    child: const Text('Read Story'),
+    onPressed: () {/* ... */},
+    ),
+    const SizedBox(width: 8),
+      TextButton(
+        child: const Text('Comment'),
+        onPressed: () {/* ... */},
+      ),
+      const SizedBox(width: 8),
+    TextButton(
+    child: const Text('Care'),
+    onPressed: () {/* ... */},
+    ),
+      TextButton(
+        child: const Text('Share'),
+        onPressed: () {/* ... */},
+      ),
+    const SizedBox(width: 8),]),
+
+
         CustomListItemTwo(
           thumbnail: Container(
             decoration: const BoxDecoration(color: Colors.blue),
@@ -181,6 +206,28 @@ class MyStatelessWidget extends StatelessWidget {
           publishDate: 'Feb 26',
           readDuration: '12 mins',
         ),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              TextButton(
+                child: const Text('Read Story'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                child: const Text('Comment'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                child: const Text('Care'),
+                onPressed: () {/* ... */},
+              ),
+              TextButton(
+                child: const Text('Share'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),]),
       ],
     );
   }

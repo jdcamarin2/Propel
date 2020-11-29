@@ -92,7 +92,7 @@ class _NewsTabState extends State<NewsTab> {
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(NewsTab.title),
+        title: Text(NewsTab.title), backgroundColor: Colors.redAccent,
       ),
       body: Container(
         child: ListView.builder(

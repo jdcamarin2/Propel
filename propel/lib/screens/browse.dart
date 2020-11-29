@@ -109,7 +109,7 @@ class _BrowseTabState extends State<Browse> {
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Organization'),
+        title: Text('Organization'),backgroundColor: Colors.amberAccent,
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
