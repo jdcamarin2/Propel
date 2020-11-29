@@ -134,13 +134,13 @@ class CustomListItemTwo extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(10.0, 0.0, 2.0,0.0),
                 child: _ArticleDescription(
                   title: title,
                   subtitle: subtitle,
                   author: author,
                   publishDate: publishDate,
-                  readDuration: readDuration,
+
                 ),
               ),
             )
@@ -158,53 +158,51 @@ class MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(8.0),
       children: <Widget>[
         CustomListItemTwo(
           thumbnail: Container(
             decoration: const BoxDecoration(color: Colors.pink),
           ),
-          title: 'Flutter 1.0 Launch',
-          subtitle: 'Flutter continues to improve and expand its horizons.'
-              'This text should max out at two lines and clip',
-          author: 'Dash',
-          publishDate: 'Dec 28',
-          readDuration: '5 mins',
+          title: 'More needs to be done for Yolanda victims',
+          subtitle: ' Apart from addressing food and health needs, the international aid effort provided tents and ...',
+          author: 'ABC Organization',
+
 
         ),
-    Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: <Widget>[
-    TextButton(
-    child: const Text('Read Story'),
-    onPressed: () {/* ... */},
-    ),
-    const SizedBox(width: 8),
-      TextButton(
-        child: const Text('Comment'),
-        onPressed: () {/* ... */},
-      ),
-      const SizedBox(width: 8),
-    TextButton(
-    child: const Text('Care'),
-    onPressed: () {/* ... */},
-    ),
-      TextButton(
-        child: const Text('Share'),
-        onPressed: () {/* ... */},
-      ),
-    const SizedBox(width: 8),]),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              TextButton(
+                child: const Text('Read Story'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                child: const Text('Comment'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                child: const Text('Care'),
+                onPressed: () {/* ... */},
+              ),
+              TextButton(
+                child: const Text('Share'),
+                onPressed: () {/* ... */},
+              ),
+              const SizedBox(width: 8),]),
 
 
         CustomListItemTwo(
           thumbnail: Container(
             decoration: const BoxDecoration(color: Colors.blue),
           ),
-          title: 'Flutter 1.2 Release - Continual updates to the framework',
-          subtitle: 'Flutter once again improves and makes updates.',
-          author: 'Flutter',
+          title: 'Make a Donation to Hello Orphanage',
+          subtitle: 'Donations are needed to continually support the orphans and disabled. ...',
+          author: 'Tulong Ampunan',
           publishDate: 'Feb 26',
-          readDuration: '12 mins',
+
         ),
         Row(
             mainAxisAlignment: MainAxisAlignment.end,
