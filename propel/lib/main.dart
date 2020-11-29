@@ -3,7 +3,7 @@ import 'package:propel/widgets/curved_navigation_bar.dart';
 import 'package:propel/screens/SingIn.dart';
 import 'package:propel/screens/news_tab.dart';
 import 'package:propel/screens/browse.dart';
-
+import 'package:propel/screens/trending.dart';
 //main method
 void main() => runApp(MaterialApp(home: BottomNavBar()));
 
@@ -17,7 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   GlobalKey _bottomNavigationKey = GlobalKey();
 
   List<Widget> _widgetOptions = <Widget>[
-    Text('Trending'),
+    MyApp(),
     NewsTab(),
     Browse(),
     SignIn()

@@ -6,7 +6,7 @@ import 'package:propel/utilities/utils.dart';
 import 'package:propel/utilities/widgets.dart';
 
 class NewsTab extends StatefulWidget {
-  static const title = 'News';
+  static const title = 'News and Notification';
   static const androidIcon = Icon(Icons.library_books);
   static const iosIcon = Icon(CupertinoIcons.news);
 
